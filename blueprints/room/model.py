@@ -5,6 +5,7 @@ from sqlalchemy.sql.expression import text
 from datetime import datetime
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
+from blueprints.user.model import Users
 
 class Rooms(db.Model):
     __tablename__ = "room"

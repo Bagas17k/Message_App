@@ -68,5 +68,13 @@ def after_request(response):
                          }))
     return response
 
+from blueprints.jwt.resources import bp_jwt
+from blueprints.user.resources import bp_user
+from blueprints.message.resources import bp_message
+
+app.register_blueprint(bp_jwt, url_prefix='/login')
+app.register_blueprint(bp_user, url_prefix='/user')
+app.register_blueprint(bp_message, url_prefix='/message')
+
 
 db.create_all()

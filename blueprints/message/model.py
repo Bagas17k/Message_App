@@ -5,6 +5,7 @@ from sqlalchemy.sql.expression import text
 from datetime import datetime
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
+from blueprints.room.model import Rooms
 
 class Messages(db.Model):
     __tablename__ = "message"
@@ -24,6 +25,6 @@ class Messages(db.Model):
     def __init__(self, message, room_id):
         self.message = message
         self.room_id = room_id
-        
+
     def __repr__(self):
         return '<Message %r>' % self.id
