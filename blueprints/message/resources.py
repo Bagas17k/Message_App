@@ -17,5 +17,6 @@ class MessageResource(Resource):
         return {'status':'ok'}, 200
     
     def post(self):
+        pass
         
 api.add_resource(MessageResource, '', '/<id>')
