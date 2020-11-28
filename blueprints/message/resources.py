@@ -26,21 +26,21 @@ class MessageResource(Resource):
         claims = get_jwt_claims()
 
         receiver = Users.query.filter_by(nomor_hp=args['nomor_hp']).first()
-        receiver_id = receiver.id
+        user_id_2 = receiver.id
         
-        if receiver_id == claims['id']:
+        if user_id_2 == claims['id']:
             app.logger.debug('DEBUG: Cannot send to self')
             return {'status': 'error send message'}, 403
         
-        room = Rooms.query.filter_by(sender_id=claims['id'])
-        room = room.filter_by(receiver_id=receiver_id).first()
+        room = Rooms.query.filter_by(user_id_1=claims['id'])
+        room = room.filter_by(user_id_2=user_id_2).first()
         
         if room is None:
-            room = Rooms.query.filter_by(receiver_id=claims['id'])
-            room = room.filter_by(sender_id=receiver_id).first()
+            room = Rooms.query.filter_by(user_id_2=claims['id'])
+            room = room.filter_by(user_id_1=user_id_2).first()
         
             if room is None:
-                room = Rooms(claims['id'], receiver_id)
+                room = Rooms(claims['id'], user_id_2)
                 db.session.add(room)
                 db.session.commit()        
         

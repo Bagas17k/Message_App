@@ -10,8 +10,8 @@ from blueprints.user.model import Users
 class Rooms(db.Model):
     __tablename__ = "room"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    sender_id = db.Column(db.Integer, ForeignKey(Users.id, ondelete='CASCADE'), nullable=False)
-    receiver_id = db.Column(db.Integer, ForeignKey(Users.id, ondelete='CASCADE'), nullable=False)
+    user_id_1 = db.Column(db.Integer, ForeignKey(Users.id, ondelete='CASCADE'), nullable=False)
+    user_id_2 = db.Column(db.Integer, ForeignKey(Users.id, ondelete='CASCADE'), nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
     updated_at = db.Column(db.DateTime(timezone=True), onupdate=func.now())
 
@@ -19,13 +19,13 @@ class Rooms(db.Model):
 
     response_fields = {
         'id' :  fields.Integer,
-        'sender_id' : fields.Integer,
-        'receiver_id' : fields.Integer,
+        'user_id_1' : fields.Integer,
+        'user_id_2' : fields.Integer,
     }
 
-    def __init__(self, sender_id, receiver_id):
-        self.sender_id = sender_id
-        self.receiver_id = receiver_id
+    def __init__(self, user_id_1, user_id_2):
+        self.user_id_1 = user_id_1
+        self.user_id_2 = user_id_2
         
     def __repr__(self):
         return '<Room %r>' % self.id
