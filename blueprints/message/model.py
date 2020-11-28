@@ -18,10 +18,12 @@ class Messages(db.Model):
     response_fields = {
         'id' :  fields.Integer,
         'message' : fields.String,
+        'room_id' : fields.Integer,
     }
 
-    def __init__(self, message):
+    def __init__(self, message, room_id):
         self.message = message
+        self.room_id = room_id
         
     def __repr__(self):
         return '<Message %r>' % self.id
