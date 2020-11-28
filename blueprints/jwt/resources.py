@@ -15,7 +15,7 @@ class CreateTokenResource(Resource):
     # create jwt token 
     def post(self):
         parser = reqparse.RequestParser()
-        parser.add_argument('nomor_hp', location='json', required=True)
+        parser.add_argument('nomor_hp', location='json', required=True, type=str)
         parser.add_argument('password', location='json', required=True)
         args = parser.parse_args()
 
