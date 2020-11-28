@@ -24,15 +24,15 @@ class CreateTokenResource(Resource):
       
         if qry_user is not None:
             user_salt = qry_user.salt
-            user_type = qry_user.user_type
+            # user_type = qry_user.user_type
             encoded = ('%s%s' % (args['password'], user_salt)).encode('utf-8')
             hash_pass = hashlib.sha512(encoded).hexdigest()
             if hash_pass == qry_user.password and qry_user.nomor_hp == args['nomor_hp']:
-                qry_user = marshal(qry_user, Users.jwt_claims_fields)
+                qry_user = marshal(qry_user, Users.jwt_fields)
                 qry_user['identifier'] = "message_app"
                 token = create_access_token(
                     identity=args['nomor_hp'], user_claims=qry_user)
-                return {'token': token, 'user_type':user_type}, 200
+                return {'token': token}, 200
         
         return {'status': 'UNAUTHORIZED', 'message': 'invalid key or secret'}, 401
 
