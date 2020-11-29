@@ -20,7 +20,8 @@ class UserResource(Resource):
         parser.add_argument('nomor_hp', location='json', required=True)
         parser.add_argument('password', location='json', required=True)
         args = parser.parse_args()
-
+        
+        # encoded password using hashlib and uuid
         salt = uuid.uuid4().hex
         encoded = ('%s%s' % (args['password'], salt)).encode('utf-8')
         hash_pass = hashlib.sha512(encoded).hexdigest()

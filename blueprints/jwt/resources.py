@@ -24,7 +24,6 @@ class CreateTokenResource(Resource):
       
         if qry_user is not None:
             user_salt = qry_user.salt
-            # user_type = qry_user.user_type
             encoded = ('%s%s' % (args['password'], user_salt)).encode('utf-8')
             hash_pass = hashlib.sha512(encoded).hexdigest()
             if hash_pass == qry_user.password and qry_user.nomor_hp == args['nomor_hp']:

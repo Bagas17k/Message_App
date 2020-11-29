@@ -40,7 +40,7 @@ def before_request():
     else:
         return {}, 200, {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'POST, PATCH, GET, DELETE', 'Access-Control-Allow-Headers': '*'}
 
-
+# log hadler
 @app.after_request
 def after_request(response):
     try:
@@ -68,10 +68,12 @@ def after_request(response):
                          }))
     return response
 
+# import blueprints
 from blueprints.jwt.resources import bp_jwt
 from blueprints.user.resources import bp_user
 from blueprints.message.resources import bp_message
 
+# set blueprints
 app.register_blueprint(bp_jwt, url_prefix='/login')
 app.register_blueprint(bp_user, url_prefix='/user')
 app.register_blueprint(bp_message, url_prefix='/message')
