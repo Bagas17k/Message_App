@@ -1,3 +1,3 @@
 # Message_App
 
-simple chat simulation using pytho flask
+simple chat simulation using python flask
