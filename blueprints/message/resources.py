@@ -91,6 +91,11 @@ class RoomResource(Resource):
             # get message per room id spcific with room partner
             messages = Messages.query.filter_by(room_id=room.id)
 
+            # last message
+            last_message = messages.order_by(desc(Messages.created_at)).first()
+            last_message = marshal(last_message, Messages.response_fields)
+            data_room["last_message"] = last_message
+
             list_messages = []
             for message in messages:
                 data_message = marshal(message, Messages.response_fields)
